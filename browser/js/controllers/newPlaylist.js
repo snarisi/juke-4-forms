@@ -1,4 +1,4 @@
-app.controller('NewPlaylistCtrl', function ($scope, NewPlaylist) {
+app.controller('NewPlaylistCtrl', function ($scope, $state, NewPlaylist) {
 	$scope.showWarning = false;
 	
 	$scope.showContents = function () {
@@ -9,11 +9,7 @@ app.controller('NewPlaylistCtrl', function ($scope, NewPlaylist) {
 	}
 	$scope.addPlaylist = function (playlist) {
 		NewPlaylist.create(playlist)
-			.then(newPlaylist => {
-				$scope.addPlaylistForm.$setPristine();
-				$scope.playlist.name = '';
-				console.log(newPlaylist);
-			});
+			.then(newPlaylist => $state.go('playlist', {id: newPlaylist._id}))
 		
 	}
 	

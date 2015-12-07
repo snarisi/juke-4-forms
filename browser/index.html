@@ -9,12 +9,15 @@
 	<script src="/angular/angular.js"></script>
 	<script src="/angular-ui-router/release/angular-ui-router.js"></script>
 	<script src="/js/module.js"></script>
+	
 	<script src="/js/controllers/album.js"></script>
 	<script src="/js/controllers/albums.js"></script>
 	<script src="/js/controllers/player.js"></script>
 	<script src="/js/controllers/artist.js"></script>
 	<script src="/js/controllers/artists.js"></script>
 	<script src="/js/controllers/newPlaylist.js"></script>
+	<script src="js/controllers/singlePlaylist.js"></script>
+	<script src="/js/controllers/playlist.js"></script>
 	<script src="/js/factories/player.js"></script>
 	<script src="/js/factories/album.js"></script>
 	<script src="/js/factories/song.js"></script>
@@ -27,13 +30,15 @@
 	<script src="/js/states/artist-albums.js"></script>
 	<script src="/js/states/artist-songs.js"></script>
 	<script src="/js/states/newPlaylist.js"></script>
+	<script src="/js/states/playlist.js"></script>
+	<script src="/js/factories/playlists.js"></script>
 </head>
 
-<body ng-app="juke">	
+<body ng-app="juke">
 
 	<div id="main" class="container-fluid">
 
-		<div class="col-xs-2">
+		<div class="col-xs-2" ng-controller="PlaylistCtrl">
 			<sidebar>
 				<section>
 					<h4 ui-sref-active="active" class="playlist-item">
@@ -51,6 +56,11 @@
 					<p>
 						<a ui-sref="newPlaylist" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-plus"></span> PLAYLIST</a>
 					</p>
+					<div ng-repeat="playlist in playlists | orderBy: name">
+						<p>
+							<a ui-sref="playlist({id: playlist._id})"><span class="glyphicon glyphicon-equalizer"></span> {{playlist.name}}</a>
+						</p>
+					</div>
 				</section>
 			</sidebar>
 		</div>
