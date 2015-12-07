@@ -7,6 +7,9 @@ app.factory('PlaylistFactory', function($http){
         getPlaylist: function(playlistId) {
             return $http.get('/api/playlists/' + playlistId)
                 .then(playlist => playlist.data);
-        }
+        },
+		addToPlaylist: function (song) {
+			return $http.post('/api/playlists/')
+		}
     }
 });
