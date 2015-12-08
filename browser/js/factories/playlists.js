@@ -8,8 +8,14 @@ app.factory('PlaylistFactory', function($http){
             return $http.get('/api/playlists/' + playlistId)
                 .then(playlist => playlist.data);
         },
-		addToPlaylist: function (song) {
-			return $http.post('/api/playlists/')
+		addToPlaylist: function (song, playlistId) {
+            console.log(song);
+			return $http.post('/api/playlists/' + playlistId + '/songs', {song: song})
+                .then(res => res.data)
+                .then(song => {
+                    song.audioUrl = '/api/songs/' + song._id + '.audio';
+                    return song;
+                });
 		}
     }
 });

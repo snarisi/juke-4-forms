@@ -5,15 +5,19 @@ app.controller('SinglePlaylist', function($scope, $stateParams, PlaylistFactory,
 	SongFactory.fetchAll()
 		.then(songs => { 
 			$scope.allSongs = songs;
-			console.log($scope.allSongs);
 		});
     
     $scope.start = PlayerFactory.start;
     $scope.isCurrent = function(song) {
+        if (!PlayerFactory.getCurrentSong()) return;
         return PlayerFactory.getCurrentSong()._id === song._id
     };
 	
 	$scope.addToPlaylist = function(song) {
-		console.log(song);
+		PlaylistFactory.addToPlaylist(song, $scope.playlist._id)
+            .then(function (newSong) {
+                $scope.playlist.songs.push(newSong);
+                $scope.selected = null;
+            });
 	}
 });

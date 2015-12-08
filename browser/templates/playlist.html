@@ -7,12 +7,12 @@
 				<div class="form-group">
 					<label class="col-xs-2 control-label">Title</label>
 					<div class="col-xs-10">
-						<select ng-options="song as song.name for song in allSongs track by song._id" ng-model="selected"></select>
+						<select class="form-control" ng-options="song as song.name for song in allSongs track by song._id" ng-model="selected" ng-required="true"></select>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-10 col-xs-offset-2">
-						<button type="submit" class="btn btn-success" ng-click="addToPlaylist(selected)">Add Song</button>
+						<button type="submit" class="btn btn-success" ng-click="addToPlaylist(selected)" ng-disabled="!addSongForm.$valid">Add Song</button>
 					</div>
 				</div>
 			</fieldset>
